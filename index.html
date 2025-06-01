@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Strive for Five - Christopher Niemczynski</title>
+  <style>
+    /* ... your existing styles ... */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+      color: #222;
+      background-color: #f9f9f9;
+      box-sizing: border-box;
+    }
+    /* Banners stretch full width and fixed */
+    .banner, .banner-secondary {
+      width: 100vw;
+      position: fixed;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      box-sizing: border-box;
+      padding-left: 20px;
+      padding-right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+    /* First Banner Styles */
+    .banner {
+      top: 0;
+      background-color: #003366;
+      color: white;
+      padding: 15px 40px;
+      justify-content: space-between;
+    }
+    .banner-left {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      white-space: nowrap;
+    }
+    .banner-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .banner-author {
+      font-size: 0.9rem;
+      color: #a8c0e6;
+      margin-top: 4px;
+      text-align: center;
+      width: 100%;
+    }
+    .banner-center {
+      flex: 1 1 auto;
+      text-align: center;
+    }
+    .banner-right {
+      flex: 1 1 auto;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .social-links-top a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .social-links-top a:hover {
+      text-decoration: underline;
+    }
+    .buy-btn {
+      background-color: #1976d2;
+      color: white;
+      padding: 10px 24px;
+      font-size: 1.2rem;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .buy-btn:hover {
+      background-color: #0d47a1;
+    }
+    /* Second Banner (Table of Contents) */
+    .banner-secondary {
+      top: 72px; /* height of first banner + some spacing */
+      background-color: #cfe2f3; /* lighter blue */
+      padding: 15px 40px;
+      border-left: 6px solid #1976d2;
+      box-sizing: border-box;
+      justify-content: flex-start;
+    }
+    /* Chapters side by side with separators */
+    .toc-link {
+      color: #0d47a1;
+      text-decoration: none;
+      font-weight: 600;
+      white-space: nowrap;
+      position: relative;
+      padding: 0 10px;
+    }
+    .toc-link:not(:last-child)::after {
+      content: "|";
+      color: #0d47a1;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      padding-left: 8px;
+    }
+    .toc-link:hover {
+      text-decoration: underline;
+    }
+    /* Add margin to content so it doesn't get hidden behind fixed banners */
+    header {
+      text-align: center;
+      margin: 130px 0 40px; /* 72 + 60 px approx for both banners */
+    }
+    .description {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+    section {
+      margin-bottom: 40px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    h3 {
+      font-size: 1.3rem;
+      color: #0073e6;
+      margin-bottom: 10px;
+    }
+    .hashtags {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 8px;
+      font-style: italic;
+    }
+    blockquote {
+      background: #f1f8ff;
+      border-left: 4px solid #1976d2;
+      padding: 15px 20px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #004085;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 1rem;
+      color: #555;
+      padding: 10px 0;
+      margin-top: 40px;
+    }
+    /* Contact form styles */
+    .contact-form-container {
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      padding: 20px;
+      background-color: #e6f0ff;
+      border: 2px solid #1976d2;
+      border-radius: 8px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .contact-form-container h2 {
+      margin-top: 0;
+      color: #003366;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #1976d2;
+      border-radius: 5px;
+      resize: vertical;
+      font-family: inherit;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 100px;
+    }
+    button[type="submit"] {
+      background-color: #1976d2;
+      color: white;
+      font-size: 1.1rem;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+    button[type="submit"]:hover {
+      background-color: #0d47a1;
+    }
+
+    /* Popup Modal Styles */
+    #thankYouModal {
+      display: none; /* hidden by default */
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #thankYouModal .modal-content {
+      background-color: white;
+      padding: 30px 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: auto;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      color: #003366;
+    }
+    #thankYouModal button {
+      margin-top: 20px;
+      background-color: #1976d2;
+      border: none;
+      color: white;
+      padding: 10px 30px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #thankYouModal button:hover {
+      background-color: #0d47a1;
+    }
+  </style>
+</head>
+<body>
+
+<!-- First Banner -->
+<div class="banner">
+  <div class="banner-left">
+    <div class="banner-title">Strive for Five</div>
+    <div class="banner-author">By Christopher Niemczynski</div>
+  </div>
+  <div class="banner-center">
+    <a href="#" class="buy-btn">Buy Now</a>
+  </div>
+  <div class="banner-right social-links-top">
+    <a href="#" target="_blank" rel="noopener">Facebook</a>
+    <a href="#" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</div>
+
+<!-- Second Banner with Chapters -->
+<div class="banner-secondary">
+  <a href="#chapter1" class="toc-link">Chapter 1: Assess Your Current Financial Situation</a>
+  <a href="#chapter2" class="toc-link">Chapter 2: Set Clear and Achievable Savings Goals</a>
+  <a href="#chapter3" class="toc-link">Chapter 3: Create a Budget That Works for You</a>
+  <a href="#chapter4" class="toc-link">Chapter 4: Build an Emergency Fund</a>
+  <a href="#chapter5" class="toc-link">Chapter 5: Start Investing for the Future</a>
+</div>
+
+<header>
+  <p class="description">
+    Strive for Five offers practical strategies for saving money and planning for a secure financial future. With actionable tips and clear steps, this book empowers readers to take control of their finances, build strong savings habits, and set themselves up for long-term success.
+  </p>
+</header>
+
+<section id="chapter1">
+  <h3>Chapter 1: Assess Your Current Financial Situation</h3>
+  <p>
+    Before you can manage your money wisely, you need to know where you currently stand. Like a GPS needing your location to chart a course, understanding your finances is the first step toward saving and security.
+  </p>
+  <p>
+    It might feel uncomfortable to face your debts or spending habits, but gaining clarity now will help you make smarter decisions. The sooner you assess your situation, the sooner you can take control of your financial future.
+  </p>
+  <p class="hashtags">#foryoupage #StriveForFive #moneymatters #moneytalks #MoneyGoals #financialfreedom #savemoney #moneytips</p>
+</section>
+
+<section id="chapter2">
+  <h3>Chapter 2: Set Clear and Achievable Savings Goals</h3>
+  <p>
+    Saving money without a specific goal can feel overwhelming and lead to inconsistency. Clear, achievable goals give your savings purpose and help you stay motivated. In this chapter, you'll learn how to create realistic goals that act as a financial road map, keeping you focused and on track for the future you want.
+  </p>
+  <p class="hashtags">#foryoupage #StriveForFive #moneymatters #moneytalks #MoneyGoals #financialfreedom #savemoney #moneytips</p>
+</section>
+
+<section id="chapter3">
+  <h3>Chapter 3: Create a Budget That Works for You</h3>
+  <p>
+    Before you can save effectively, you need a budget—a financial roadmap that helps you track spending and stay aligned with your goals. Without one, it's easy to overspend and lose sight of where your money goes. This chapter explores popular budgeting methods and helps you build a personalized plan, whether you're paying off debt, saving for a big goal, or building a safety net.
+  </p>
+  <p class="hashtags">#foryoupage #StriveForFive #moneymatters #moneytalks #MoneyGoals #financialfreedom #savemoney #moneytips</p>
+</section>
+
+<section id="chapter4">
+  <h3>Chapter 4: Build an Emergency Fund</h3>
+  <p>
+    An emergency fund is a key part of financial stability. It protects you from unexpected expenses like job loss, medical bills, or car repairs. Without it, surprise costs can lead to stress, debt, and setbacks. With it, you gain peace of mind and avoid relying on credit. This chapter shows you how to build a fund that fits your life—and why it’s essential for reaching your financial goals.
+  </p>
+  <p class="hashtags">#foryoupage #StriveForFive #moneymatters #moneytalks #MoneyGoals #financialfreedom #savemoney #moneytips</p>
+</section>
+
+<section id="chapter5">
+  <h3>Chapter 5: Start Investing for the Future</h3>
+  <p>
+    With your budget, savings, and emergency fund in place, it’s time to grow your wealth. Investing helps your money work for you, offering long-term growth beyond what saving alone can provide. Whether you're planning for retirement or future goals, investing is key to achieving financial freedom.
+  </p>
+  <p class="hashtags">#foryoupage #StriveForFive #moneymatters #moneytalks #MoneyGoals #financialfreedom #savemoney #moneytips</p>
+</section>
+
+<blockquote>
+  “In a world of information overload, <strong>Strive for Five</strong> hits hard and fast. A small investment that, if used properly, will pay out the rest of your life.”
+</blockquote>
+
+<div class="contact-form-container">
+  <h2>Contact the Author</h2>
+  <form id="contactForm" action="https://formspree.io/f/xdkzoozj" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</div>
+
+<!-- Popup Modal -->
+<div id="thankYouModal">
+  <div class="modal-content">
+    <p>Thank you for your message, I'll get back with you shortly.</p>
+    <button id="modalCloseBtn">OK</button>
+  </div>
+</div>
+
+<footer>
+  &copy; 2025 Christopher Niemczynski. All rights reserved.
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    const modal = document.getElementById('thankYouModal');
+    const closeBtn = document.getElementById('modalCloseBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Show the modal on success
+          modal.style.display = 'flex';
+          form.reset();
+        } else {
+          alert('Oops! There was a problem submitting your form.');
+        }
+      } catch (error) {
+        alert('Oops! There was a problem submitting your form.');
+      }
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Optional: close modal if user clicks outside modal-content
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
