@@ -93,14 +93,34 @@
       background-color: #0d47a1;
     }
     /* Second Banner (Table of Contents) */
-    .banner-secondary {
-      top: 72px; /* height of first banner + some spacing */
-      background-color: #cfe2f3; /* lighter blue */
-      padding: 15px 40px;
-      border-left: 6px solid #1976d2;
-      box-sizing: border-box;
-      justify-content: flex-start;
-    }
+.banner-secondary {
+top: 72px;
+background-color: #cfe2f3;
+padding: 15px 40px;
+border-left: 6px solid #1976d2;
+box-sizing: border-box;
+width: 100vw;
+position: fixed;
+left: 50%;
+right: 50%;
+margin-left: -50vw;
+margin-right: -50vw;
+display: flex;
+justify-content: center;   /* center the toc-container */
+align-items: center;
+gap: 10px;
+z-index: 1000;}
+    
+.toc-container {
+max-width: 900px;         /* same max-width as body */
+margin: 0 auto;           /* centers container horizontally */
+display: flex;            /* lays out links side-by-side */
+gap: 10px;                /* space between links */
+flex-wrap: wrap;          /* wrap to new lines if needed */
+justify-content: center;  /* center links inside container */
+align-items: center;      /* vertical alignment */
+}
+
     /* Chapters side by side with separators */
     .toc-link {
       color: #0d47a1;
