@@ -93,34 +93,14 @@
       background-color: #0d47a1;
     }
     /* Second Banner (Table of Contents) */
-.banner-secondary {
-top: 72px;
-background-color: #cfe2f3;
-padding: 15px 40px;
-border-left: 6px solid #1976d2;
-box-sizing: border-box;
-width: 100vw;
-position: fixed;
-left: 50%;
-right: 50%;
-margin-left: -50vw;
-margin-right: -50vw;
-display: flex;
-justify-content: center;   /* center the toc-container */
-align-items: center;
-gap: 10px;
-z-index: 1000;}
-    
-.toc-container {
-max-width: 900px;         /* same max-width as body */
-margin: 0 auto;           /* centers container horizontally */
-display: flex;            /* lays out links side-by-side */
-gap: 10px;                /* space between links */
-flex-wrap: wrap;          /* wrap to new lines if needed */
-justify-content: center;  /* center links inside container */
-align-items: center;      /* vertical alignment */
-}
-
+    .banner-secondary {
+      top: 72px; /* height of first banner + some spacing */
+      background-color: #cfe2f3; /* lighter blue */
+      padding: 15px 40px;
+      border-left: 6px solid #1976d2;
+      box-sizing: border-box;
+      justify-content: flex-start;
+    }
     /* Chapters side by side with separators */
     .toc-link {
       color: #0d47a1;
@@ -131,7 +111,7 @@ align-items: center;      /* vertical alignment */
       padding: 0 10px;
     }
     .toc-link:not(:last-child)::after {
-      content: "";
+      content: "|";
       color: #0d47a1;
       position: absolute;
       right: 0;
@@ -288,23 +268,21 @@ align-items: center;      /* vertical alignment */
     <div class="banner-author">By Christopher Niemczynski</div>
   </div>
   <div class="banner-center">
-    <a href="https://www.amazon.com/s?k=niemczynski&crid=TQPDZL9YO5XK&sprefix=%2Caps%2C579&ref=nb_sb_ss_recent_1_0_recent" class="buy-btn">Buy Now</a>
+    <a href="#" class="buy-btn">Buy Now</a>
   </div>
   <div class="banner-right social-links-top">
-    <a href="https://www.facebook.com/striveforfive2025" target="_blank" rel="noopener">Facebook</a>
-    <a href="https://www.tiktok.com/@striveforfive2025" target="_blank" rel="noopener">TikTok</a>
+    <a href="#" target="_blank" rel="noopener">Facebook</a>
+    <a href="#" target="_blank" rel="noopener">TikTok</a>
   </div>
 </div>
 
 <!-- Second Banner with Chapters -->
 <div class="banner-secondary">
-<div class="toc-container">
-<a href="#chapter1" class="toc-link">Chapter 1: Assess Your Current Financial Situation</a>
-<a href="#chapter2" class="toc-link">Chapter 2: Set Clear and Achievable Savings Goals</a>
-<a href="#chapter3" class="toc-link">Chapter 3: Create a Budget That Works for You</a>
-<a href="#chapter4" class="toc-link">Chapter 4: Build an Emergency Fund</a>
-<a href="#chapter5" class="toc-link">Chapter 5: Start Investing for the Future</a>
-</div>    
+  <a href="#chapter1" class="toc-link">Chapter 1: Assess Your Current Financial Situation</a>
+  <a href="#chapter2" class="toc-link">Chapter 2: Set Clear and Achievable Savings Goals</a>
+  <a href="#chapter3" class="toc-link">Chapter 3: Create a Budget That Works for You</a>
+  <a href="#chapter4" class="toc-link">Chapter 4: Build an Emergency Fund</a>
+  <a href="#chapter5" class="toc-link">Chapter 5: Start Investing for the Future</a>
 </div>
 
 <header>
